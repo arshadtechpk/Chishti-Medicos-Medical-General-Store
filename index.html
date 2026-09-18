@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Chishti Medical & General Store - medicines, health products and home delivery in Shadman Town, North Nazimabad, Karachi.">
+<meta name="theme-color" content="#123f8c">
+<title>Chishti Medical & General Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="#home"><span class="logo">❤<b>+</b></span><span><strong>CHISHTI MEDICAL</strong><small>& GENERAL STORE</small></span></a>
+    <nav id="nav">
+      <a href="#home">Home</a><a href="#categories">Categories</a><a href="#order">Order</a><a href="#about">About</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="wa-top" target="_blank" href="https://wa.me/923102666077">WhatsApp</a>
+    <button class="menu" onclick="document.getElementById('nav').classList.toggle('show')">☰</button>
+  </div>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="pill">💊 All Kind of Medicines Available</span>
+      <h1>Everything you need for <span>health & care.</span></h1>
+      <p>Browse by category, add products to your order, enter your delivery details and send the complete order directly to our WhatsApp.</p>
+      <div class="actions">
+        <a class="btn primary" href="#categories">Browse Categories</a>
+        <a class="btn white" href="#order">Place Order</a>
+      </div>
+      <div class="mini"><span>🚚 Home Delivery</span><span>🏷️ Discount UpTo 10%</span><span>💬 WhatsApp Orders</span></div>
+    </div>
+    <div class="hero-box">
+      <div class="badge">DISCOUNT<br><b>UP TO 10%</b></div>
+      <div class="heart">❤<span>+</span></div>
+      <div class="ecg">━━━━╱╲━━╱╲━━━━</div>
+      <h2>CHISHTI MEDICAL</h2><h3>& GENERAL STORE</h3>
+      <div class="home-delivery">🚚 Home Delivery</div>
+      <strong>0310-2666077</strong>
+    </div>
+  </div>
+</section>
+
+<section id="categories" class="section">
+  <div class="container">
+    <div class="heading"><span>QUICKLY BROWSE</span><h2>Shop by Category</h2><p>Choose a category and add the required items to your WhatsApp order.</p></div>
+    <div class="cat-grid">
+      <button class="cat c1" onclick="addCategory('Over the Counter Medicines')"><div><b>Over the Counter<br>Medicines</b><small>View / Add Order →</small></div><strong>💊</strong></button>
+      <button class="cat c2" onclick="addCategory('Prescribed Medicines')"><div><b>Prescribed<br>Medicines</b><small>View / Add Order →</small></div><strong>🧾</strong></button>
+      <button class="cat c3" onclick="addCategory('Vitamins & Supplements')"><div><b>Vitamins &<br>Supplements</b><small>View / Add Order →</small></div><strong>🧴</strong></button>
+      <button class="cat c4" onclick="addCategory('Baby & Nutrition')"><div><b>Baby &<br>Nutrition</b><small>View / Add Order →</small></div><strong>🍼</strong></button>
+      <button class="cat c5" onclick="addCategory('Men’s Health')"><div><b>Men’s<br>Health</b><small>View / Add Order →</small></div><strong>👨</strong></button>
+      <button class="cat c6" onclick="addCategory('Women’s Health')"><div><b>Women’s<br>Health</b><small>View / Add Order →</small></div><strong>👩</strong></button>
+      <button class="cat c7" onclick="addCategory('Skin & Hair Care')"><div><b>Skin & Hair<br>Care</b><small>View / Add Order →</small></div><strong>🧴</strong></button>
+      <button class="cat c8" onclick="addCategory('Dental Care')"><div><b>Dental<br>Care</b><small>View / Add Order →</small></div><strong>🦷</strong></button>
+      <button class="cat c9" onclick="addCategory('Elderly Care')"><div><b>Elderly<br>Care</b><small>View / Add Order →</small></div><strong>🧓</strong></button>
+      <button class="cat secret" onclick="unlock18()"><div><b>🔒 18+ Private Care</b><small>Private / discreet category →</small></div><strong>🔐</strong></button>
+    </div>
+  </div>
+</section>
+
+<section id="private" class="private hidden">
+  <div class="container private-inner">
+    <div><span>PRIVATE CATEGORY</span><h2>18+ Private Care</h2><p>Discreet ordering for adult personal-care and sexual-health products. Products are shown only after age confirmation.</p>
+    <button class="btn primary" onclick="addCategory('18+ Private Care')">Add Private Care to Order</button></div>
+    <div class="private-icon">🔒<small>18+</small></div>
+  </div>
+</section>
+
+<section id="order" class="section order-section">
+  <div class="container">
+    <div class="heading"><span>WHATSAPP ORDER</span><h2>Your Order & Customer Details</h2><p>Fill in your details and send the complete order to 0310-2666077.</p></div>
+    <div class="order-grid">
+      <div class="form-card">
+        <h3>Customer Details</h3>
+        <label>Customer Name<input id="name" type="text" placeholder="Enter your name"></label>
+        <label>Mobile Number<input id="phone" type="tel" placeholder="03XX-XXXXXXX"></label>
+        <label>Delivery Address<textarea id="address" rows="3" placeholder="Enter complete delivery address"></textarea></label>
+        <label>Area / Landmark<input id="area" type="text" placeholder="e.g. Shadman Town"></label>
+        <label>Order Notes<textarea id="notes" rows="2" placeholder="Prescription, quantity or other instructions"></textarea></label>
+      </div>
+      <div class="form-card cart">
+        <h3>Order Items</h3>
+        <div id="items" class="items"><div class="empty">No items added yet.<br>Choose a category above or type your requirement below.</div></div>
+        <label>Product / Medicine Requirement<textarea id="custom" rows="4" placeholder="Example: Panadol 2 packs, baby diapers size M, etc."></textarea></label>
+        <button class="btn primary full" onclick="sendOrder()">💬 Send Complete Order on WhatsApp</button>
+        <p class="small">Your details and order list will be placed into a WhatsApp message. You can review it before sending.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section alt">
+<div class="container about"><div class="about-logo">❤<b>+</b><small>CHISHTI</small></div><div><div class="heading left"><span>ABOUT US</span><h2>Chishti Medical & General Store</h2></div><p>Medicines, healthcare essentials and general-store products with convenient WhatsApp ordering and home delivery.</p><p><b>Store:</b> Zahid Chishti</p><div class="notice">Prescription medicines are supplied subject to applicable prescription/pharmacy requirements. Availability, price and delivery are confirmed by the store.</div></div></div>
+</section>
+
+<section id="contact" class="contact">
+<div class="container contact-grid"><div><div class="heading left"><span>CONTACT</span><h2>Chishti Medical & General Store</h2></div><p>📞 <a href="tel:+923102666077">0310-2666077</a></p><p>📍 R-439, Sector 14/A, Shadman Town, North Nazimabad Town, Karachi.</p><a class="btn primary" target="_blank" href="https://wa.me/923102666077">💬 WhatsApp Us</a></div><div class="map"><h3>Store Location</h3><p>R-439, Sector 14/A,<br>Shadman Town, North Nazimabad Town, Karachi.</p><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=R-439%20Sector%2014%2FA%20Shadman%20Town%20North%20Nazimabad%20Karachi">📍 Open Google Maps →</a></div></div>
+</section>
+</main>
+
+<footer><div class="container footer"><div><b>CHISHTI MEDICAL & GENERAL STORE</b><small>All Kind of Medicines Available</small></div><div>© <span id="year"></span> Chishti Medical & General Store</div></div></footer>
+<a class="float" target="_blank" href="https://wa.me/923102666077">💬</a>
+
+<script>
+const selected=[];
+function addCategory(cat){
+  if(!selected.includes(cat)) selected.push(cat);
+  renderItems();
+  document.getElementById('order').scrollIntoView({behavior:'smooth'});
+}
+function renderItems(){
+  const el=document.getElementById('items');
+  if(!selected.length){el.innerHTML='<div class="empty">No items added yet.</div>';return;}
+  el.innerHTML=selected.map((x,i)=>`<div class="item"><span>${x}</span><button onclick="removeItem(${i})">×</button></div>`).join('');
+}
+function removeItem(i){selected.splice(i,1);renderItems();}
+function unlock18(){
+  if(!confirm('This section is for customers aged 18 or above. Confirm that you are 18+ to continue.')) return;
+  document.getElementById('private').classList.remove('hidden');
+  document.getElementById('private').scrollIntoView({behavior:'smooth'});
+}
+function sendOrder(){
+  const name=document.getElementById('name').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const address=document.getElementById('address').value.trim();
+  const area=document.getElementById('area').value.trim();
+  const notes=document.getElementById('notes').value.trim();
+  const custom=document.getElementById('custom').value.trim();
+  if(!name || !phone || !address){alert('Please enter Customer Name, Mobile Number and Delivery Address.');return;}
+  const items=selected.length?selected.join(', '):'Not selected';
+  let msg=`*CHISHTI MEDICAL & GENERAL STORE - NEW ORDER*%0A%0A*Customer:* ${encodeURIComponent(name)}%0A*Mobile:* ${encodeURIComponent(phone)}%0A*Address:* ${encodeURIComponent(address)}%0A*Area/Landmark:* ${encodeURIComponent(area||'-')}%0A*Categories:* ${encodeURIComponent(items)}%0A*Product Requirement:* ${encodeURIComponent(custom||'-')}%0A*Notes:* ${encodeURIComponent(notes||'-')}`;
+  window.open('https://wa.me/923102666077?text='+msg,'_blank');
+}
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
