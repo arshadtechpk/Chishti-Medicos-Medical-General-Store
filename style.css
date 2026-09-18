@@ -25,3 +25,25 @@
 .qty{display:flex;align-items:center;gap:7px}.qty button{border:0;background:#124d9e;color:#fff;border-radius:7px;width:27px;height:27px;font-size:18px;cursor:pointer}.qty .remove{background:#e52d38}
 @media(max-width:850px){.medicine-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.medicine-grid{grid-template-columns:1fr}.cart-bar{flex-direction:column;align-items:stretch}.cart-bar .btn{width:100%}}
+
+/* Chishti Medicos home branding */
+.shop-home { position: relative; }
+.shop-badge {
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:999px;
+  font-weight:800;
+  letter-spacing:.5px;
+  margin-bottom:12px;
+  background:#fff;
+  box-shadow:0 4px 18px rgba(0,0,0,.08);
+}
+.shop-contact-card {
+  margin:14px 0 8px;
+  padding:12px 14px;
+  border-radius:14px;
+  background:rgba(255,255,255,.92);
+  line-height:1.7;
+  font-size:.95rem;
+  box-shadow:0 4px 18px rgba(0,0,0,.06);
+}
