@@ -50,10 +50,27 @@
 <section id="categories" class="section">
   <div class="container">
     <div class="heading">
-      <span>MEDICINE CATALOGUE</span>
-      <h2>Search Medicines & Healthcare Products</h2>
-      <p>Type a medicine name, for example <b>Panadol</b>, then tap a product to add it to your cart.</p>
+      <span>CHISHTI MEDICOS</span>
+      <h2>Shop by Category</h2>
+      <p>Category par click karein — sirf usi category ki medicines aur products show honge.</p>
     </div>
+
+    <div class="category-grid">
+      <button class="category-card c1" onclick="openCategory('OTC')"><div class="cat-icon">💊</div><div><b>Over the Counter<br>Medicines</b><small>Common medicines & essentials</small></div></button>
+      <button class="category-card c2" onclick="openCategory('Prescribed Medicines')"><div class="cat-icon">🩺</div><div><b>Prescribed<br>Medicines</b><small>Prescription products</small></div></button>
+      <button class="category-card c3" onclick="openCategory('Vitamins')"><div class="cat-icon">💎</div><div><b>Vitamins &<br>Supplements</b><small>Health & nutrition</small></div></button>
+      <button class="category-card c4" onclick="openCategory('Baby Care')"><div class="cat-icon">👶</div><div><b>Baby &<br>Nutrition</b><small>Baby care products</small></div></button>
+      <button class="category-card c5" onclick="openCategory('Men’s Health')"><div class="cat-icon">👨</div><div><b>Men’s<br>Health</b><small>Men's personal care</small></div></button>
+      <button class="category-card c6" onclick="openCategory('Women’s Health')"><div class="cat-icon">👩</div><div><b>Women’s<br>Health</b><small>Women's care</small></div></button>
+      <button class="category-card c7" onclick="openCategory('Skin & Hair Care')"><div class="cat-icon">🧴</div><div><b>Skin & Hair<br>Care</b><small>Skin & hair products</small></div></button>
+      <button class="category-card c8" onclick="openCategory('Dental Care')"><div class="cat-icon">🦷</div><div><b>Dental<br>Care</b><small>Oral hygiene</small></div></button>
+      <button class="category-card c9" onclick="openCategory('Elderly Care')"><div class="cat-icon">🧓</div><div><b>Elderly<br>Care</b><small>Daily care essentials</small></div></button>
+      <button class="category-card c10" onclick="openCategory('First Aid')"><div class="cat-icon">🩹</div><div><b>First<br>Aid</b><small>First aid essentials</small></div></button>
+      <button class="category-card c11 private-card" onclick="unlock18()"><div class="cat-icon">🔒</div><div><b>18+ Private<br>Care</b><small>Discreet adult care</small></div></button>
+      <button class="category-card c12 secret-card" onclick="openSecretBox()"><div class="cat-icon">📦</div><div><b>Secret Box<br>Service</b><small>Discreet sealed delivery</small></div></button>
+    </div>
+
+    <div class="selected-category" id="selectedCategory">All Products</div>
 
     <div class="search-box">
       <span>🔎</span>
@@ -80,11 +97,27 @@
   </div>
 </section>
 
-<section id="private" class="private hidden">
+<section id="private" class="private">
   <div class="container private-inner">
-    <div><span>PRIVATE CATEGORY</span><h2>18+ Private Care</h2><p>Discreet ordering for adult personal-care and sexual-health products. Products are shown only after age confirmation.</p>
-    <button class="btn primary" onclick="addCategory('18+ Private Care')">Add Private Care to Order</button></div>
-    <div class="private-icon">🔒<small>18+</small></div>
+    <div>
+      <span>DISCREET SERVICE</span>
+      <h2>18+ Private Care</h2>
+      <p>Adult personal-care products with discreet ordering. Confirm 18+ to view private products.</p>
+      <button class="btn primary" onclick="unlock18()">🔒 Confirm 18+ & View Products</button>
+    </div>
+    <div class="private-icon">18+<small>PRIVATE</small></div>
+  </div>
+</section>
+
+<section id="secretBox" class="secret-box">
+  <div class="container secret-inner">
+    <div class="secret-icon">📦</div>
+    <div>
+      <span>PRIVATE DELIVERY</span>
+      <h2>Secret Box Service Available</h2>
+      <p>Private items can be packed in a plain, discreet box without product details on the outside.</p>
+      <button class="btn dark" onclick="openSecretBox()">📦 Add Secret Box Service</button>
+    </div>
   </div>
 </section>
 
@@ -133,6 +166,37 @@ function escapeHTML(value){
   return String(value).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 }
 
+const categoryMap = {
+  "OTC":"OTC",
+  "Prescribed Medicines":"Prescribed Medicines",
+  "Vitamins":"Vitamins",
+  "Baby Care":"Baby",
+  "Men’s Health":"Men’s Health",
+  "Women’s Health":"Women",
+  "Skin & Hair Care":"Skin",
+  "Dental Care":"Dental Care",
+  "Elderly Care":"Elderly Care",
+  "First Aid":"First Aid"
+};
+
+function openCategory(label){
+  activeCategory = categoryMap[label] || label;
+  document.getElementById('medicineSearch').value = '';
+  document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+  const btn = [...document.querySelectorAll('.filter')].find(b => b.textContent.trim() === activeCategory);
+  if(btn) btn.classList.add('active');
+  document.getElementById('selectedCategory').textContent = label;
+  renderMedicines();
+  document.getElementById('medicineGrid').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function openSecretBox(){
+  document.getElementById('notes').value =
+    (document.getElementById('notes').value.trim() ? document.getElementById('notes').value.trim() + '\n' : '') +
+    'Please use Secret Box / discreet packaging for this order.';
+  document.getElementById('order').scrollIntoView({behavior:'smooth'});
+}
+
 function searchMedicines(){
   renderMedicines();
 }
@@ -162,7 +226,7 @@ function renderMedicines(){
       <div class="medicine-info">
         <b>${escapeHTML(p.name)}</b>
         <small>${escapeHTML(p.category)}</small>
-        <span>${escapeHTML(p.note)}</span>
+        <span>${escapeHTML(p.note || 'Tap to add to cart')}</span>
       </div>
       <strong class="add-sign">${inCart ? '✓' : '+'}</strong>
     </button>`;
@@ -216,8 +280,9 @@ function renderCart(){
 
 function unlock18(){
   if(!confirm('This section is for customers aged 18 or above. Confirm that you are 18+ to continue.')) return;
-  document.getElementById('private').classList.remove('hidden');
-  document.getElementById('private').scrollIntoView({behavior:'smooth'});
+  openCategory('18+ Private Care');
+  document.getElementById('medicineSearch').value = '';
+  renderMedicines();
 }
 
 function sendOrder(){

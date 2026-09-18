@@ -20,3 +20,11 @@ Large Catalogue Edition
 - Catalogue data should be reviewed against DRAP registration/current pharmacy inventory before treating it as a complete registered-drug list.
 
 Home screen branding updated with Chishti Medicos shop name, owner, address and contact number.
+
+
+FINAL CATEGORY-FIRST EDITION
+- Home/category screen now uses a pharmacy-style two-column category catalogue.
+- Clicking a category filters the catalogue to that category.
+- 18+ Private Care is restored with age confirmation.
+- Secret Box Service is restored and adds discreet-packaging instructions to the order.
+- Existing search, cart, quantity controls and WhatsApp ordering remain included.
