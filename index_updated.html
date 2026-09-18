@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Chishti Medical & General Store - medicines, health products and home delivery in Shadman Town, North Nazimabad, Karachi.">
+<meta name="theme-color" content="#123f8c">
+<title>Chishti Medical & General Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="#home"><span class="logo">❤<b>+</b></span><span><strong>CHISHTI MEDICAL</strong><small>& GENERAL STORE</small></span></a>
+    <nav id="nav">
+      <a href="#home">Home</a><a href="#categories">Categories</a><a href="#order">Order</a><a href="#about">About</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="wa-top" target="_blank" href="https://wa.me/923102666077">WhatsApp</a>
+    <button class="menu" onclick="document.getElementById('nav').classList.toggle('show')">☰</button>
+  </div>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="pill">💊 All Kind of Medicines Available</span>
+      <h1>Chishti Medical &amp; General Store</h1>
+      <p><strong>Zahid Chishti</strong> • Home Delivery • UpTo 10% Discount</p><div class="shop-contact-card">
+        <div>📍 R-439, Sector 14/A, Shadman Town, North Nazimabad Town, Karachi</div>
+        <div>📞 0310-2666077 &nbsp; | &nbsp; 💬 WhatsApp Orders</div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="#categories">Browse Categories</a>
+        <a class="btn white" href="#order">Place Order</a>
+      </div>
+      <div class="mini"><span>🚚 Home Delivery</span><span>🏷️ Discount UpTo 10%</span><span>💬 WhatsApp Orders</span></div>
+    </div>
+    <div class="hero-box">
+      <div class="badge">DISCOUNT<br><b>UP TO 10%</b></div>
+      <div class="heart">❤<span>+</span></div>
+      <div class="ecg">━━━━╱╲━━╱╲━━━━</div>
+      <h2>CHISHTI MEDICAL</h2><h3>& GENERAL STORE</h3>
+      <div class="home-delivery">🚚 Home Delivery</div>
+      <strong>0310-2666077</strong>
+    </div>
+  </div>
+</section>
+
+<section id="categories" class="section">
+  <div class="container">
+    <div class="heading">
+      <span>CHISHTI MEDICOS</span>
+      <h2>Shop by Category</h2>
+      <p>Category par click karein — sirf usi category ki medicines aur products show honge.</p>
+    </div>
+
+    <div class="category-grid">
+      <button class="category-card c1" onclick="openCategory('OTC')"><div class="cat-icon">💊</div><div><b>Over the Counter<br>Medicines</b><small>Common medicines & essentials</small></div></button>
+      <button class="category-card c2" onclick="openCategory('Prescribed Medicines')"><div class="cat-icon">🩺</div><div><b>Prescribed<br>Medicines</b><small>Prescription products</small></div></button>
+      <button class="category-card c3" onclick="openCategory('Vitamins')"><div class="cat-icon">💎</div><div><b>Vitamins &<br>Supplements</b><small>Health & nutrition</small></div></button>
+      <button class="category-card c4" onclick="openCategory('Baby Care')"><div class="cat-icon">👶</div><div><b>Baby &<br>Nutrition</b><small>Baby care products</small></div></button>
+      <button class="category-card c5" onclick="openCategory('Men’s Health')"><div class="cat-icon">👨</div><div><b>Men’s<br>Health</b><small>Men's personal care</small></div></button>
+      <button class="category-card c6" onclick="openCategory('Women’s Health')"><div class="cat-icon">👩</div><div><b>Women’s<br>Health</b><small>Women's care</small></div></button>
+      <button class="category-card c7" onclick="openCategory('Skin & Hair Care')"><div class="cat-icon">🧴</div><div><b>Skin & Hair<br>Care</b><small>Skin & hair products</small></div></button>
+      <button class="category-card c8" onclick="openCategory('Dental Care')"><div class="cat-icon">🦷</div><div><b>Dental<br>Care</b><small>Oral hygiene</small></div></button>
+      <button class="category-card c9" onclick="openCategory('Elderly Care')"><div class="cat-icon">🧓</div><div><b>Elderly<br>Care</b><small>Daily care essentials</small></div></button>
+      <button class="category-card c10" onclick="openCategory('First Aid')"><div class="cat-icon">🩹</div><div><b>First<br>Aid</b><small>First aid essentials</small></div></button>
+      <button class="category-card c11 private-card" onclick="unlock18()"><div class="cat-icon">🔒</div><div><b>18+ Private<br>Care</b><small>Discreet adult care</small></div></button>
+      <button class="category-card c12 secret-card" onclick="openSecretBox()"><div class="cat-icon">📦</div><div><b>Secret Box<br>Service</b><small>Discreet sealed delivery</small></div></button>
+    </div>
+
+    <div class="selected-category" id="selectedCategory">All Products</div>
+
+    <div class="search-box">
+      <span>🔎</span>
+      <input id="medicineSearch" type="search" placeholder="Search medicine... e.g. Panadol" oninput="searchMedicines()">
+    </div>
+
+    <div class="catalogue-tools">
+      <button class="filter active" onclick="filterMedicines('All',this)">All</button>
+      <button class="filter" onclick="filterMedicines('OTC',this)">OTC</button>
+      <button class="filter" onclick="filterMedicines('Pain & Fever',this)">Pain & Fever</button>
+      <button class="filter" onclick="filterMedicines('Cough & Cold',this)">Cough & Cold</button>
+      <button class="filter" onclick="filterMedicines('Vitamins',this)">Vitamins</button>
+      <button class="filter" onclick="filterMedicines('Baby Care',this)">Baby Care</button>
+      <button class="filter" onclick="filterMedicines('Personal Care',this)">Personal Care</button>
+    </div>
+
+    <div id="medicineGrid" class="medicine-grid"></div>
+    <p id="noResults" class="no-results hidden">No matching product found. You can type the required medicine in the order notes and send it to WhatsApp.</p>
+
+    <div class="cart-bar">
+      <div><b>🛒 Cart</b><span id="cartCount">0 items</span></div>
+      <a class="btn primary" href="#order">View Cart / Order</a>
+    </div>
+  </div>
+</section>
+
+<section id="private" class="private">
+  <div class="container private-inner">
+    <div>
+      <span>DISCREET SERVICE</span>
+      <h2>18+ Private Care</h2>
+      <p>Adult personal-care products with discreet ordering. Confirm 18+ to view private products.</p>
+      <button class="btn primary" onclick="unlock18()">🔒 Confirm 18+ & View Products</button>
+    </div>
+    <div class="private-icon">18+<small>PRIVATE</small></div>
+  </div>
+</section>
+
+<section id="secretBox" class="secret-box">
+  <div class="container secret-inner">
+    <div class="secret-icon">📦</div>
+    <div>
+      <span>PRIVATE DELIVERY</span>
+      <h2>Secret Box Service Available</h2>
+      <p>Private items can be packed in a plain, discreet box without product details on the outside.</p>
+      <button class="btn dark" onclick="openSecretBox()">📦 Add Secret Box Service</button>
+    </div>
+  </div>
+</section>
+
+<section id="order" class="section order-section">
+  <div class="container">
+    <div class="heading"><span>WHATSAPP ORDER</span><h2>Your Order & Customer Details</h2><p>Fill in your details and send the complete order to 0310-2666077.</p></div>
+    <div class="order-grid">
+      <div class="form-card">
+        <h3>Customer Details</h3>
+        <label>Customer Name<input id="name" type="text" placeholder="Enter your name"></label>
+        <label>Mobile Number<input id="phone" type="tel" placeholder="03XX-XXXXXXX"></label>
+        <label>Delivery Address<textarea id="address" rows="3" placeholder="Enter complete delivery address"></textarea></label>
+        <label>Area / Landmark<input id="area" type="text" placeholder="e.g. Shadman Town"></label>
+        <label>Order Notes<textarea id="notes" rows="2" placeholder="Prescription, quantity or other instructions"></textarea></label>
+      </div>
+      <div class="form-card cart">
+        <h3>Order Items</h3>
+        <div id="items" class="items"><div class="empty">No items added yet.<br>Choose a category above or type your requirement below.</div></div>
+        <label>Product / Medicine Requirement<textarea id="custom" rows="4" placeholder="Example: Panadol 2 packs, baby diapers size M, etc."></textarea></label>
+        <button class="btn primary full" onclick="sendOrder()">💬 Send Complete Order on WhatsApp</button>
+        <p class="small">Your details and order list will be placed into a WhatsApp message. You can review it before sending.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section alt">
+<div class="container about"><div class="about-logo">❤<b>+</b><small>CHISHTI</small></div><div><div class="heading left"><span>ABOUT US</span><h2>Chishti Medical & General Store</h2></div><p>Medicines, healthcare essentials and general-store products with convenient WhatsApp ordering and home delivery.</p><p><b>Store:</b> Zahid Chishti</p><div class="notice">Prescription medicines are supplied subject to applicable prescription/pharmacy requirements. Availability, price and delivery are confirmed by the store.</div></div></div>
+</section>
+
+<section id="contact" class="contact">
+<div class="container contact-grid"><div><div class="heading left"><span>CONTACT</span><h2>Chishti Medical & General Store</h2></div><p>📞 <a href="tel:+923102666077">0310-2666077</a></p><p>📍 R-439, Sector 14/A, Shadman Town, North Nazimabad Town, Karachi.</p><a class="btn primary" target="_blank" href="https://wa.me/923102666077">💬 WhatsApp Us</a></div><div class="map"><h3>Store Location</h3><p>R-439, Sector 14/A,<br>Shadman Town, North Nazimabad Town, Karachi.</p><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=R-439%20Sector%2014%2FA%20Shadman%20Town%20North%20Nazimabad%20Karachi">📍 Open Google Maps →</a></div></div>
+</section>
+</main>
+
+<footer><div class="container footer"><div><b>CHISHTI MEDICAL & GENERAL STORE</b><small>All Kind of Medicines Available</small></div><div>© <span id="year"></span> Chishti Medical & General Store</div></div></footer>
+<a class="float" target="_blank" href="https://wa.me/923102666077">💬</a>
+
+<script>
+const products = [{"name": "Panadol 500mg Tablets", "category": "Pain & Fever"}, {"name": "Panadol Extra Tablets", "category": "Pain & Fever"}, {"name": "Calpol Suspension", "category": "Children"}, {"name": "Brufen 200mg Tablets", "category": "Pain & Fever"}, {"name": "Brufen 400mg Tablets", "category": "Pain & Fever"}, {"name": "Brufen Syrup", "category": "Children"}, {"name": "Disprin Tablets", "category": "Pain & Fever"}, {"name": "Ansaid 100mg Tablets", "category": "Pain & Fever"}, {"name": "Dicloran 50mg Tablets", "category": "Pain & Fever"}, {"name": "Voltaren 50mg Tablets", "category": "Pain & Fever"}, {"name": "Gaviscon Suspension", "category": "Gastro"}, {"name": "Gaviscon Tablets", "category": "Gastro"}, {"name": "Eno Sachets", "category": "Gastro"}, {"name": "Omeprazole 20mg Capsules", "category": "Gastro"}, {"name": "Risek 20mg Capsules", "category": "Gastro"}, {"name": "Nexum 20mg Tablets", "category": "Gastro"}, {"name": "Nexum 40mg Tablets", "category": "Gastro"}, {"name": "Motilium 10mg Tablets", "category": "Gastro"}, {"name": "Buscopan 10mg Tablets", "category": "Gastro"}, {"name": "ORS Sachets", "category": "Gastro"}, {"name": "Strepsils Lozenges", "category": "Cough & Cold"}, {"name": "Benadryl Syrup", "category": "Cough & Cold"}, {"name": "Cough Syrup", "category": "Cough & Cold"}, {"name": "Arinac Tablets", "category": "Cough & Cold"}, {"name": "Fexet 120mg Tablets", "category": "Allergy"}, {"name": "Fexet 180mg Tablets", "category": "Allergy"}, {"name": "Cetirizine 10mg Tablets", "category": "Allergy"}, {"name": "Loratadine 10mg Tablets", "category": "Allergy"}, {"name": "Augmentin 375mg Tablets", "category": "Antibiotics"}, {"name": "Augmentin 625mg Tablets", "category": "Antibiotics"}, {"name": "Augmentin 1g Tablets", "category": "Antibiotics"}, {"name": "Amoxil 500mg Capsules", "category": "Antibiotics"}, {"name": "Azomax 250mg Tablets", "category": "Antibiotics"}, {"name": "Azomax 500mg Tablets", "category": "Antibiotics"}, {"name": "Ciproxin 500mg Tablets", "category": "Antibiotics"}, {"name": "Flagyl 400mg Tablets", "category": "Antibiotics"}, {"name": "Metronidazole 400mg Tablets", "category": "Antibiotics"}, {"name": "Cefspan 200mg Tablets", "category": "Antibiotics"}, {"name": "Cefspan 400mg Tablets", "category": "Antibiotics"}, {"name": "Cefixime 200mg Capsules", "category": "Antibiotics"}, {"name": "Cefixime 400mg Tablets", "category": "Antibiotics"}, {"name": "Risek Insta Sachets", "category": "Gastro"}, {"name": "Domel 10mg Tablets", "category": "Gastro"}, {"name": "Imodium Capsules", "category": "Gastro"}, {"name": "Loprin 75mg Tablets", "category": "Heart & Blood"}, {"name": "Disprin CV 150mg Tablets", "category": "Heart & Blood"}, {"name": "Plavix 75mg Tablets", "category": "Heart & Blood"}, {"name": "Concor 2.5mg Tablets", "category": "Heart & Blood"}, {"name": "Concor 5mg Tablets", "category": "Heart & Blood"}, {"name": "Norvasc 5mg Tablets", "category": "Heart & Blood"}, {"name": "Norvasc 10mg Tablets", "category": "Heart & Blood"}, {"name": "Lipitor 10mg Tablets", "category": "Cholesterol"}, {"name": "Lipitor 20mg Tablets", "category": "Cholesterol"}, {"name": "Rosuvastatin 10mg Tablets", "category": "Cholesterol"}, {"name": "Atorva 20mg Tablets", "category": "Cholesterol"}, {"name": "Glucophage 500mg Tablets", "category": "Diabetes"}, {"name": "Glucophage 850mg Tablets", "category": "Diabetes"}, {"name": "Glucophage 1000mg Tablets", "category": "Diabetes"}, {"name": "Diamicron MR 60mg Tablets", "category": "Diabetes"}, {"name": "Janumet 50/500mg Tablets", "category": "Diabetes"}, {"name": "Amaryl 2mg Tablets", "category": "Diabetes"}, {"name": "Lasix 40mg Tablets", "category": "Heart & Blood"}, {"name": "Aldactone 25mg Tablets", "category": "Heart & Blood"}, {"name": "Losartan 50mg Tablets", "category": "Heart & Blood"}, {"name": "Cozaar 50mg Tablets", "category": "Heart & Blood"}, {"name": "Vitamin C Tablets", "category": "Vitamins"}, {"name": "Vitamin D3 Capsules", "category": "Vitamins"}, {"name": "Calcium Tablets", "category": "Vitamins"}, {"name": "Multivitamin Tablets", "category": "Vitamins"}, {"name": "Neurobion Tablets", "category": "Vitamins"}, {"name": "Neurobion Injection", "category": "Vitamins"}, {"name": "Centrum Adults", "category": "Vitamins"}, {"name": "Feroglobin Capsules", "category": "Vitamins"}, {"name": "Folic Acid Tablets", "category": "Vitamins"}, {"name": "Zinc Tablets", "category": "Vitamins"}, {"name": "Betnovate Cream", "category": "Skin"}, {"name": "Fucidin Cream", "category": "Skin"}, {"name": "Soframycin Cream", "category": "Skin"}, {"name": "Polyfax Skin Ointment", "category": "Skin"}, {"name": "Canesten Cream", "category": "Skin"}, {"name": "Clotrimazole Cream", "category": "Skin"}, {"name": "Calamine Lotion", "category": "Skin"}, {"name": "Dettol Antiseptic Liquid", "category": "First Aid"}, {"name": "Savlon Antiseptic", "category": "First Aid"}, {"name": "Hydrogen Peroxide", "category": "First Aid"}, {"name": "Povidone Iodine Solution", "category": "First Aid"}, {"name": "Bandage Roll", "category": "First Aid"}, {"name": "Cotton Wool", "category": "First Aid"}, {"name": "Surgical Tape", "category": "First Aid"}, {"name": "Disposable Face Masks", "category": "First Aid"}, {"name": "Baby Diapers", "category": "Baby"}, {"name": "Baby Wipes", "category": "Baby"}, {"name": "Baby Formula", "category": "Baby"}, {"name": "Baby Shampoo", "category": "Baby"}, {"name": "Baby Lotion", "category": "Baby"}, {"name": "Baby Powder", "category": "Baby"}, {"name": "Sanitary Pads", "category": "Women"}, {"name": "Pregnancy Test Kit", "category": "Women"}, {"name": "Folic Acid 5mg Tablets", "category": "Women"}, {"name": "Iron Tablets", "category": "Women"}, {"name": "Condoms", "category": "18+ Private Care"}, {"name": "Personal Lubricant", "category": "18+ Private Care"}, {"name": "Male Wellness Products", "category": "18+ Private Care"}, {"name": "Female Wellness Products", "category": "18+ Private Care"}];
+
+let cart = [];
+let activeCategory = 'All';
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+
+const categoryMap = {
+  "OTC":"OTC",
+  "Prescribed Medicines":"Prescribed Medicines",
+  "Vitamins":"Vitamins",
+  "Baby Care":"Baby",
+  "Men’s Health":"Men’s Health",
+  "Women’s Health":"Women",
+  "Skin & Hair Care":"Skin",
+  "Dental Care":"Dental Care",
+  "Elderly Care":"Elderly Care",
+  "First Aid":"First Aid"
+};
+
+function openCategory(label){
+  activeCategory = categoryMap[label] || label;
+  document.getElementById('medicineSearch').value = '';
+  document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+  const btn = [...document.querySelectorAll('.filter')].find(b => b.textContent.trim() === activeCategory);
+  if(btn) btn.classList.add('active');
+  document.getElementById('selectedCategory').textContent = label;
+  renderMedicines();
+  document.getElementById('medicineGrid').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function openSecretBox(){
+  document.getElementById('notes').value =
+    (document.getElementById('notes').value.trim() ? document.getElementById('notes').value.trim() + '\n' : '') +
+    'Please use Secret Box / discreet packaging for this order.';
+  document.getElementById('order').scrollIntoView({behavior:'smooth'});
+}
+
+function searchMedicines(){
+  renderMedicines();
+}
+
+function filterMedicines(category, button){
+  activeCategory = category;
+  document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+  button.classList.add('active');
+  renderMedicines();
+}
+
+function renderMedicines(){
+  const q = document.getElementById('medicineSearch').value.trim().toLowerCase();
+  const list = products.filter(p =>
+    (activeCategory === 'All' || p.category === activeCategory) &&
+    (!q || (p.name + ' ' + p.category + ' ' + p.note).toLowerCase().includes(q))
+  );
+
+  const grid = document.getElementById('medicineGrid');
+  document.getElementById('noResults').classList.toggle('hidden', list.length !== 0);
+
+  grid.innerHTML = list.map((p, i) => {
+    const originalIndex = products.indexOf(p);
+    const inCart = cart.find(x => x.name === p.name);
+    return `<button class="medicine-card" onclick="addToCart(${originalIndex})">
+      <div class="medicine-icon">💊</div>
+      <div class="medicine-info">
+        <b>${escapeHTML(p.name)}</b>
+        <small>${escapeHTML(p.category)}</small>
+        <span>${escapeHTML(p.note || 'Tap to add to cart')}</span>
+      </div>
+      <strong class="add-sign">${inCart ? '✓' : '+'}</strong>
+    </button>`;
+  }).join('');
+}
+
+function addToCart(index){
+  const p = products[index];
+  const existing = cart.find(x => x.name === p.name);
+  if(existing) existing.qty++;
+  else cart.push({name:p.name, category:p.category, qty:1});
+  renderCart();
+  renderMedicines();
+  document.getElementById('order').scrollIntoView({behavior:'smooth'});
+}
+
+function changeQty(index, delta){
+  cart[index].qty += delta;
+  if(cart[index].qty <= 0) cart.splice(index,1);
+  renderCart();
+  renderMedicines();
+}
+
+function removeCartItem(index){
+  cart.splice(index,1);
+  renderCart();
+  renderMedicines();
+}
+
+function renderCart(){
+  const el = document.getElementById('items');
+  const count = cart.reduce((sum,x)=>sum+x.qty,0);
+  document.getElementById('cartCount').textContent = count + (count === 1 ? ' item' : ' items');
+
+  if(!cart.length){
+    el.innerHTML='<div class="empty">Your cart is empty.<br>Search for a medicine above and tap it to add.</div>';
+    return;
+  }
+
+  el.innerHTML = cart.map((x,i)=>`
+    <div class="cart-item">
+      <div><b>${escapeHTML(x.name)}</b><small>${escapeHTML(x.category)}</small></div>
+      <div class="qty">
+        <button onclick="changeQty(${i},-1)">−</button>
+        <b>${x.qty}</b>
+        <button onclick="changeQty(${i},1)">+</button>
+        <button class="remove" onclick="removeCartItem(${i})">×</button>
+      </div>
+    </div>`).join('');
+}
+
+let ageVerified = false;
+
+function normalizePhone(phone){
+  let n = phone.replace(/\D/g,'');
+  if(n.startsWith('0')) n = '92' + n.slice(1);
+  if(!n.startsWith('92')) n = '92' + n;
+  return n;
+}
+
+function unlock18(){
+  if(ageVerified){ openPrivateCare(); return; }
+  const phone = prompt('Enter your mobile number for 18+ verification (03XX-XXXXXXX):');
+  if(!phone) return;
+  const clean = normalizePhone(phone);
+  if(clean.length < 12){ alert('Please enter a valid Pakistan mobile number.'); return; }
+
+  const message = `CHISHTI MEDICAL & GENERAL STORE\n\nAre you 18 years old or above?\nPlease reply YES to continue.\nReply NO to exit.`;
+  window.open('https://wa.me/' + clean + '?text=' + encodeURIComponent(message), '_blank');
+
+  if(confirm('After replying YES on WhatsApp, press OK to continue. If you replied NO, press Cancel.')){
+    ageVerified = true;
+    openPrivateCare();
+  } else alert('18+ Private Care access cancelled.');
+}
+
+function openPrivateCare(){
+  openCategory('18+ Private Care');
+  document.getElementById('medicineSearch').value = '';
+  renderMedicines();
+}
+
+function sendOrder(){
+  const name=document.getElementById('name').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const address=document.getElementById('address').value.trim();
+  const area=document.getElementById('area').value.trim();
+  const notes=document.getElementById('notes').value.trim();
+  const custom=document.getElementById('custom').value.trim();
+
+  if(!name || !phone || !address){
+    alert('Please enter Customer Name, Mobile Number and Delivery Address.');
+    return;
+  }
+
+  const orderLines = cart.length
+    ? cart.map((x,i) => `${i+1}. ${x.name} — Qty: ${x.qty}`).join('\n')
+    : 'No catalogue item selected';
+
+  const message =
+`*CHISHTI MEDICAL & GENERAL STORE - NEW ORDER*
+
+*Customer:* ${name}
+*Mobile:* ${phone}
+*Delivery Address:* ${address}
+*Area/Landmark:* ${area || '-'}
+
+*Cart:*
+${orderLines}
+
+*Other Medicine/Product Requirement:* ${custom || '-'}
+*Notes:* ${notes || '-'}
+
+Please confirm availability, price and delivery.`;
+
+  window.open('https://wa.me/923102666077?text='+encodeURIComponent(message),'_blank');
+}
+
+document.getElementById('year').textContent=new Date().getFullYear();
+renderMedicines();
+renderCart();
+</script>
+</body>
+</html>
