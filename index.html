@@ -46,18 +46,33 @@
 
 <section id="categories" class="section">
   <div class="container">
-    <div class="heading"><span>QUICKLY BROWSE</span><h2>Shop by Category</h2><p>Choose a category and add the required items to your WhatsApp order.</p></div>
-    <div class="cat-grid">
-      <button class="cat c1" onclick="addCategory('Over the Counter Medicines')"><div><b>Over the Counter<br>Medicines</b><small>View / Add Order →</small></div><strong>💊</strong></button>
-      <button class="cat c2" onclick="addCategory('Prescribed Medicines')"><div><b>Prescribed<br>Medicines</b><small>View / Add Order →</small></div><strong>🧾</strong></button>
-      <button class="cat c3" onclick="addCategory('Vitamins & Supplements')"><div><b>Vitamins &<br>Supplements</b><small>View / Add Order →</small></div><strong>🧴</strong></button>
-      <button class="cat c4" onclick="addCategory('Baby & Nutrition')"><div><b>Baby &<br>Nutrition</b><small>View / Add Order →</small></div><strong>🍼</strong></button>
-      <button class="cat c5" onclick="addCategory('Men’s Health')"><div><b>Men’s<br>Health</b><small>View / Add Order →</small></div><strong>👨</strong></button>
-      <button class="cat c6" onclick="addCategory('Women’s Health')"><div><b>Women’s<br>Health</b><small>View / Add Order →</small></div><strong>👩</strong></button>
-      <button class="cat c7" onclick="addCategory('Skin & Hair Care')"><div><b>Skin & Hair<br>Care</b><small>View / Add Order →</small></div><strong>🧴</strong></button>
-      <button class="cat c8" onclick="addCategory('Dental Care')"><div><b>Dental<br>Care</b><small>View / Add Order →</small></div><strong>🦷</strong></button>
-      <button class="cat c9" onclick="addCategory('Elderly Care')"><div><b>Elderly<br>Care</b><small>View / Add Order →</small></div><strong>🧓</strong></button>
-      <button class="cat secret" onclick="unlock18()"><div><b>🔒 18+ Private Care</b><small>Private / discreet category →</small></div><strong>🔐</strong></button>
+    <div class="heading">
+      <span>MEDICINE CATALOGUE</span>
+      <h2>Search Medicines & Healthcare Products</h2>
+      <p>Type a medicine name, for example <b>Panadol</b>, then tap a product to add it to your cart.</p>
+    </div>
+
+    <div class="search-box">
+      <span>🔎</span>
+      <input id="medicineSearch" type="search" placeholder="Search medicine... e.g. Panadol" oninput="searchMedicines()">
+    </div>
+
+    <div class="catalogue-tools">
+      <button class="filter active" onclick="filterMedicines('All',this)">All</button>
+      <button class="filter" onclick="filterMedicines('OTC',this)">OTC</button>
+      <button class="filter" onclick="filterMedicines('Pain & Fever',this)">Pain & Fever</button>
+      <button class="filter" onclick="filterMedicines('Cough & Cold',this)">Cough & Cold</button>
+      <button class="filter" onclick="filterMedicines('Vitamins',this)">Vitamins</button>
+      <button class="filter" onclick="filterMedicines('Baby Care',this)">Baby Care</button>
+      <button class="filter" onclick="filterMedicines('Personal Care',this)">Personal Care</button>
+    </div>
+
+    <div id="medicineGrid" class="medicine-grid"></div>
+    <p id="noResults" class="no-results hidden">No matching product found. You can type the required medicine in the order notes and send it to WhatsApp.</p>
+
+    <div class="cart-bar">
+      <div><b>🛒 Cart</b><span id="cartCount">0 items</span></div>
+      <a class="btn primary" href="#order">View Cart / Order</a>
     </div>
   </div>
 </section>
@@ -106,23 +121,124 @@
 <a class="float" target="_blank" href="https://wa.me/923102666077">💬</a>
 
 <script>
-const selected=[];
-function addCategory(cat){
-  if(!selected.includes(cat)) selected.push(cat);
-  renderItems();
+const products = [
+  {name:'Panadol 500mg Tablets',category:'Pain & Fever',note:'Paracetamol pain & fever relief'},
+  {name:'Panadol Extra Tablets',category:'Pain & Fever',note:'Pain & fever relief'},
+  {name:'Calpol Suspension',category:'Pain & Fever',note:'Paracetamol suspension'},
+  {name:'Brufen Tablets',category:'Pain & Fever',note:'Ibuprofen product'},
+  {name:'Disprin Tablets',category:'Pain & Fever',note:'Pain relief product'},
+  {name:'ORS Sachets',category:'OTC',note:'Oral rehydration salts'},
+  {name:'Gaviscon',category:'OTC',note:'Antacid product'},
+  {name:'Eno Sachets',category:'OTC',note:'Antacid product'},
+  {name:'Strepsils Lozenges',category:'Cough & Cold',note:'Throat lozenges'},
+  {name:'Benadryl Syrup',category:'Cough & Cold',note:'Cough/cold product'},
+  {name:'Cough Syrup',category:'Cough & Cold',note:'Cough relief — availability confirmed by store'},
+  {name:'Vitamin C Tablets',category:'Vitamins',note:'Vitamin C supplement'},
+  {name:'Multivitamin Tablets',category:'Vitamins',note:'Multivitamin supplement'},
+  {name:'Vitamin D3',category:'Vitamins',note:'Vitamin D supplement'},
+  {name:'Calcium Tablets',category:'Vitamins',note:'Calcium supplement'},
+  {name:'Baby Diapers',category:'Baby Care',note:'Baby care product'},
+  {name:'Baby Wipes',category:'Baby Care',note:'Baby care product'},
+  {name:'Baby Formula',category:'Baby Care',note:'Baby nutrition — brand/size confirmed by store'},
+  {name:'Sanitary Pads',category:'Personal Care',note:'Women personal-care product'},
+  {name:'Hand Sanitizer',category:'Personal Care',note:'Personal-care product'},
+  {name:'Antiseptic Solution',category:'Personal Care',note:'Antiseptic product'}
+];
+
+let cart = [];
+let activeCategory = 'All';
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+
+function searchMedicines(){
+  renderMedicines();
+}
+
+function filterMedicines(category, button){
+  activeCategory = category;
+  document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+  button.classList.add('active');
+  renderMedicines();
+}
+
+function renderMedicines(){
+  const q = document.getElementById('medicineSearch').value.trim().toLowerCase();
+  const list = products.filter(p =>
+    (activeCategory === 'All' || p.category === activeCategory) &&
+    (!q || (p.name + ' ' + p.category + ' ' + p.note).toLowerCase().includes(q))
+  );
+
+  const grid = document.getElementById('medicineGrid');
+  document.getElementById('noResults').classList.toggle('hidden', list.length !== 0);
+
+  grid.innerHTML = list.map((p, i) => {
+    const originalIndex = products.indexOf(p);
+    const inCart = cart.find(x => x.name === p.name);
+    return `<button class="medicine-card" onclick="addToCart(${originalIndex})">
+      <div class="medicine-icon">💊</div>
+      <div class="medicine-info">
+        <b>${escapeHTML(p.name)}</b>
+        <small>${escapeHTML(p.category)}</small>
+        <span>${escapeHTML(p.note)}</span>
+      </div>
+      <strong class="add-sign">${inCart ? '✓' : '+'}</strong>
+    </button>`;
+  }).join('');
+}
+
+function addToCart(index){
+  const p = products[index];
+  const existing = cart.find(x => x.name === p.name);
+  if(existing) existing.qty++;
+  else cart.push({name:p.name, category:p.category, qty:1});
+  renderCart();
+  renderMedicines();
   document.getElementById('order').scrollIntoView({behavior:'smooth'});
 }
-function renderItems(){
-  const el=document.getElementById('items');
-  if(!selected.length){el.innerHTML='<div class="empty">No items added yet.</div>';return;}
-  el.innerHTML=selected.map((x,i)=>`<div class="item"><span>${x}</span><button onclick="removeItem(${i})">×</button></div>`).join('');
+
+function changeQty(index, delta){
+  cart[index].qty += delta;
+  if(cart[index].qty <= 0) cart.splice(index,1);
+  renderCart();
+  renderMedicines();
 }
-function removeItem(i){selected.splice(i,1);renderItems();}
+
+function removeCartItem(index){
+  cart.splice(index,1);
+  renderCart();
+  renderMedicines();
+}
+
+function renderCart(){
+  const el = document.getElementById('items');
+  const count = cart.reduce((sum,x)=>sum+x.qty,0);
+  document.getElementById('cartCount').textContent = count + (count === 1 ? ' item' : ' items');
+
+  if(!cart.length){
+    el.innerHTML='<div class="empty">Your cart is empty.<br>Search for a medicine above and tap it to add.</div>';
+    return;
+  }
+
+  el.innerHTML = cart.map((x,i)=>`
+    <div class="cart-item">
+      <div><b>${escapeHTML(x.name)}</b><small>${escapeHTML(x.category)}</small></div>
+      <div class="qty">
+        <button onclick="changeQty(${i},-1)">−</button>
+        <b>${x.qty}</b>
+        <button onclick="changeQty(${i},1)">+</button>
+        <button class="remove" onclick="removeCartItem(${i})">×</button>
+      </div>
+    </div>`).join('');
+}
+
 function unlock18(){
   if(!confirm('This section is for customers aged 18 or above. Confirm that you are 18+ to continue.')) return;
   document.getElementById('private').classList.remove('hidden');
   document.getElementById('private').scrollIntoView({behavior:'smooth'});
 }
+
 function sendOrder(){
   const name=document.getElementById('name').value.trim();
   const phone=document.getElementById('phone').value.trim();
@@ -130,12 +246,38 @@ function sendOrder(){
   const area=document.getElementById('area').value.trim();
   const notes=document.getElementById('notes').value.trim();
   const custom=document.getElementById('custom').value.trim();
-  if(!name || !phone || !address){alert('Please enter Customer Name, Mobile Number and Delivery Address.');return;}
-  const items=selected.length?selected.join(', '):'Not selected';
-  let msg=`*CHISHTI MEDICAL & GENERAL STORE - NEW ORDER*%0A%0A*Customer:* ${encodeURIComponent(name)}%0A*Mobile:* ${encodeURIComponent(phone)}%0A*Address:* ${encodeURIComponent(address)}%0A*Area/Landmark:* ${encodeURIComponent(area||'-')}%0A*Categories:* ${encodeURIComponent(items)}%0A*Product Requirement:* ${encodeURIComponent(custom||'-')}%0A*Notes:* ${encodeURIComponent(notes||'-')}`;
-  window.open('https://wa.me/923102666077?text='+msg,'_blank');
+
+  if(!name || !phone || !address){
+    alert('Please enter Customer Name, Mobile Number and Delivery Address.');
+    return;
+  }
+
+  const orderLines = cart.length
+    ? cart.map((x,i) => `${i+1}. ${x.name} — Qty: ${x.qty}`).join('\n')
+    : 'No catalogue item selected';
+
+  const message =
+`*CHISHTI MEDICAL & GENERAL STORE - NEW ORDER*
+
+*Customer:* ${name}
+*Mobile:* ${phone}
+*Delivery Address:* ${address}
+*Area/Landmark:* ${area || '-'}
+
+*Cart:*
+${orderLines}
+
+*Other Medicine/Product Requirement:* ${custom || '-'}
+*Notes:* ${notes || '-'}
+
+Please confirm availability, price and delivery.`;
+
+  window.open('https://wa.me/923102666077?text='+encodeURIComponent(message),'_blank');
 }
+
 document.getElementById('year').textContent=new Date().getFullYear();
+renderMedicines();
+renderCart();
 </script>
 </body>
 </html>
